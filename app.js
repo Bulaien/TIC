@@ -61,7 +61,7 @@ function spielStarten() {
 function zugBeenden() {
 
     if(siegPruefen()=== true) {
-        spielBeenden()
+        spielBeenden(false)
         return;
     }
     if(aktuelleKlasse === spieler_class){
@@ -85,10 +85,10 @@ function spielstandAktualisieren() {
 
 function siegPruefen() {
     for (const kombination of sieg_kombi) {
-        kombination.every(function (feld){
+      const gewonnen = kombination.every(function (feld){
           return  feld.classList.contains(aktuelleKlasse)
         })
-        if (sieg_kombi === true){
+        if (gewonnen === true){
             return true
         }
     }
