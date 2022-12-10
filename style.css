@@ -1,3 +1,8 @@
+:root {
+    --spieler-farbe:green;
+    --gegner-farbe:red;
+}
+
 * {
    font-family: Arial, Helvetica, sans-serif;
    box-sizing: border-box;
@@ -13,9 +18,10 @@ body {
     gap: 10px;
 }
 
-.spielstand {
-    font-size: clamp(2rem, 10vh, 4rem);
-    font-weight: 200;
+.spielstand, 
+.overlay-text {
+    font-size: 2rem;
+    font-weight: 900;
     text-align: center;
 }
 
@@ -24,7 +30,7 @@ body {
     height: 1000px;
     aspect-ratio: 1 / 1;
     max-width: 90vw;
-    max-height: 50vh;
+    max-height: 70vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -63,7 +69,7 @@ body {
 }
 
 .feld.spieler::before {
-    border: 1rem solid green;
+    border: 1rem solid var(--spieler-farbe);
     border-radius: 50%;
     width:100%;
     height: 100%;
@@ -71,7 +77,7 @@ body {
 
 .feld.gegner::before,
 .feld.gegner::after {
-    background-color: red;
+    background-color: var(--gegner-farbe);
     width: 1rem;
     height: 100%;
 }
@@ -85,3 +91,55 @@ body {
     transform: translateX(-50%) rotate(-45deg);
 
 }
+
+.spielstand.spieler {
+    color: var(--spieler-farbe)
+}
+
+.spielstand.gegner {
+    color: var(--gegner-farbe)
+
+}
+
+.feld:not([disabled]) {
+    cursor: pointer;
+}
+
+.spielstand.spieler ~ .spielfeld .feld:not([disabled]):hover::before {
+    opacity:0.3;
+}
+
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.98);
+    position: fixed;
+    inset: 0;
+    color: #c9cc00;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(1rem, 2vh, 4rem);
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .overlay-button {
+    font-size: 2rem;
+    font-weight: 600;
+    background-color: #00ff00;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 2rem/50%;
+    cursor: pointer;
+  }
+  
+  .overlay-button:hover {
+    background-color: #00e600;
+  }
+  
+  .overlay.sichtbar {
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity 1.5s;
+  }

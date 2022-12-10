@@ -3,12 +3,31 @@ const spielstand_class ="spielstand"
 const feld_class = "feld"
 const spieler_class = "spieler"
 const gegner_class= "gegner"
-
+const overlay_klasse ="overlay"
+const overlay_text_klasse = "overlay-text"
+const overlay_button_klasse = "overlay-button"
+const sichtbar_klasse = "sichtbar"
+const overlay = document.querySelector("." + overlay_klasse)
+const overlayText = document.querySelector("." + overlay_text_klasse)
+const overlayButton = document.querySelector("." + overlay_button_klasse)
 const spielfeld = document.querySelector("." + spielfeld_class)
 const spielstand = document.querySelector("." + spielstand_class)
 const felder = document.querySelectorAll("." + feld_class)
 const gegner = document.querySelector("." + gegner_class)
 const spieler = document.querySelector("." + spieler_class)
+
+const sieg_kombi = [
+    [felder[0], felder[1], felder[2]],
+    [felder[3], felder[4], felder[5]],
+    [felder[6], felder[7], felder[8]],
+    [felder[0], felder[3], felder[6]],
+    [felder[1], felder[4], felder[7]],
+    [felder[2], felder[5], felder[8]],
+    [felder[0], felder[4], felder[8]],
+    [felder[2], felder[4], felder[6]]
+]
+
+
 
 let aktuelleKlasse;
 spielStarten();
@@ -40,6 +59,11 @@ function spielStarten() {
 }
 
 function zugBeenden() {
+
+    if(siegPruefen()=== true) {
+        spielBeenden()
+        return;
+    }
     if(aktuelleKlasse === spieler_class){
         aktuelleKlasse = gegner_class;
     } else if (aktuelleKlasse === gegner_class){
@@ -52,7 +76,31 @@ function zugBeenden() {
 }
 
 function spielstandAktualisieren() {
+    spielstand.classList.remove(spieler_class, gegner_class)
     if (aktuelleKlasse === spieler_class) {
         spielstand.innerText = "Du bist am Zug"
     } else { spielstand.innerText = "Der Gegner ist am Zug"}
+    spielstand.classList.add(aktuelleKlasse)
+}
+
+function siegPruefen() {
+    for (const kombination of sieg_kombi) {
+        kombination.every(function (feld){
+          return  feld.classList.contains(aktuelleKlasse)
+        })
+        if (sieg_kombi === true){
+            return true
+        }
+    }
+    return false;
+}
+
+function spielBeenden() {
+    if (aktuelleKlasse === spieler_class) {
+        overlayText.innerText = "Du hast gewonnen!"
+    } else {
+        overlayText.innerText = "Der Gegner hat gewonnen!"
+    }
+
+    overlay.classList.add(sichtbar_klasse)
 }
