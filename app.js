@@ -32,6 +32,10 @@ const sieg_kombi = [
 let aktuelleKlasse;
 spielStarten();
 
+if (overlayButton.addEventListener("click", spielStarten)===true){
+    overlay.classList.remove(sichtbar_klasse)
+}
+
 function klickVerarbeitung(ereignis) {
     const feld = ereignis.target;
     if (spielsteinSetzen(feld)=== true) {
@@ -52,6 +56,7 @@ function spielsteinSetzen(feld) {
 }
 
 function spielStarten() {
+    
     for(const feld of felder){
         feld.addEventListener("click", klickVerarbeitung)
     }
@@ -102,5 +107,8 @@ function spielBeenden() {
         overlayText.innerText = "Der Gegner hat gewonnen!"
     }
 
-    overlay.classList.add(sichtbar_klasse)
+    
+    
 }
+
+

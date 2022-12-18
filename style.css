@@ -14,7 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
 }
 
@@ -30,7 +30,7 @@ body {
     height: 1000px;
     aspect-ratio: 1 / 1;
     max-width: 90vw;
-    max-height: 70vh;
+    max-height: 50vh;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -111,23 +111,24 @@ body {
 
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.98);
+    background-color: rgba(150, 135, 135, 0.98);
     position: fixed;
     inset: 0;
-    color: #c9cc00;
+    color: #5c5c4c;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: clamp(1rem, 2vh, 4rem);
+    gap:clamp(1rem, 2vh, 4rem);
     opacity: 0;
     pointer-events: none;
   }
   
   .overlay-button {
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 600;
-    background-color: #00ff00;
+    background-color: #ffe600e7;
     border: none;
     padding: 0.5em 1em;
     border-radius: 2rem/50%;
@@ -135,7 +136,7 @@ body {
   }
   
   .overlay-button:hover {
-    background-color: #00e600;
+    background-color: #f5ad4f;
   }
   
   .overlay.sichtbar {
